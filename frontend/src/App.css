@@ -1,0 +1,1161 @@
+/* =========================================================
+   APP CONTAINER
+========================================================= */
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  padding: 28px;
+  box-sizing: border-box;
+
+  background: #f3f6fa;
+}
+
+/* =========================================================
+   CHAT WINDOW
+========================================================= */
+
+.chat-window {
+  width: 470px;
+  height: 720px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.chat-header {
+  height: 80px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 18px;
+
+  background: #2864e8;
+
+  color: #ffffff;
+}
+
+/* =========================================================
+   HEADER LEFT
+========================================================= */
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ai-logo {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  overflow: hidden;
+}
+
+.ai-logo img {
+  width: 34px;
+  height: 50px;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.header-subtitle {
+  margin-top: 3px;
+
+  font-size: 13px;
+
+  opacity: 0.85;
+}
+
+/* =========================================================
+   HEADER ACTIONS
+========================================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.header-button {
+  width: 34px;
+  height: 34px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-size: 21px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.2s ease;
+}
+
+.header-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* =========================================================
+   MESSAGE AREA
+========================================================= */
+
+.chat-messages {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 24px 18px;
+
+  background: #ffffff;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.welcome-container {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.welcome-icon {
+  width: 62px;
+  height: 62px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eaf1ff;
+
+  font-size: 30px;
+
+  margin-bottom: 16px;
+}
+
+.welcome-container h2 {
+  margin: 0 0 8px;
+
+  font-size: 23px;
+
+  color: #1e293b;
+}
+
+.welcome-container p {
+  max-width: 280px;
+
+  margin: 0;
+
+  line-height: 1.5;
+
+  font-size: 15px;
+
+  color: #64748b;
+}
+
+
+/* =========================================================
+   MESSAGE ROW
+========================================================= */
+
+.message-row {
+  width: 100%;
+
+  display: flex;
+
+  margin-bottom: 14px;
+}
+
+.user-row {
+  justify-content: flex-end;
+}
+
+.ai-row {
+  justify-content: flex-start;
+}
+
+/* =========================================================
+   MESSAGE BUBBLE
+========================================================= */
+
+.message-bubble {
+  max-width: 78%;
+
+  padding: 11px 14px;
+
+  border-radius: 15px;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  word-break: break-word;
+
+  white-space: pre-wrap;
+}
+
+/* =========================================================
+   USER BUBBLE
+========================================================= */
+
+.user-bubble {
+  background: #2864e8;
+
+  color: #ffffff;
+
+  border-bottom-right-radius: 5px;
+}
+
+/* =========================================================
+   AI BUBBLE
+========================================================= */
+
+.ai-bubble {
+  background: #f1f5f9;
+
+  color: #1e293b;
+
+  border-bottom-left-radius: 5px;
+}
+
+/* =========================================================
+   AI OPTION BUTTONS
+========================================================= */
+
+.chat-options {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 10px;
+}
+
+
+/* =========================================================
+   INDIVIDUAL OPTION BUTTON
+========================================================= */
+
+.chat-option-button {
+  border: 1px solid #c9d9f7;
+
+  border-radius: 10px;
+
+  padding: 8px 12px;
+
+  background: #ffffff;
+
+  color: #2864e8;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  line-height: 1.35;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+
+  max-width: 100%;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   OPTION HOVER
+========================================================= */
+
+.chat-option-button:hover:not(:disabled) {
+
+  background: #eaf1ff;
+
+  border-color: #2864e8;
+
+  color: #1d55ce;
+
+  box-shadow:
+    0 3px 10px rgba(40, 100, 232, 0.12);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   OPTION CLICK
+========================================================= */
+
+.chat-option-button:active:not(:disabled) {
+
+  transform: scale(0.97);
+
+  background: #dbe8ff;
+}
+
+
+/* =========================================================
+   OPTION DISABLED
+========================================================= */
+
+.chat-option-button:disabled {
+
+  cursor: not-allowed;
+
+  opacity: 0.55;
+}
+/* =========================================================
+   INPUT AREA
+========================================================= */
+
+.chat-input-area {
+  flex-shrink: 0;
+
+  padding: 14px 16px;
+
+  border-top: 1px solid #e5e7eb;
+
+  background: #ffffff;
+}
+
+/* =========================================================
+   INPUT WRAPPER
+========================================================= */
+
+.input-wrapper {
+  min-height: 54px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 7px 0 10px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d8dee8;
+
+  border-radius: 15px;
+
+  background: #ffffff;
+}
+
+/* =========================================================
+   TEXT INPUT
+========================================================= */
+
+.input-wrapper input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+
+  outline: none;
+
+  padding: 0 10px;
+
+  font-size: 14px;
+
+  color: #1e293b;
+
+  background: transparent;
+}
+
+.input-wrapper input::placeholder {
+  color: #9aa5b5;
+}
+
+/* =========================================================
+   MIC BUTTON
+========================================================= */
+
+.mic-button {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================================
+   VOICE TO TEXT PROCESSING LOADER
+========================================================= */
+
+.voice-search-loader {
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid #dbe8ff;
+  border-top-color: #2864e8;
+
+  border-radius: 50%;
+
+  display: block;
+
+  animation: voiceSearchRotate 0.75s linear infinite;
+}
+
+@keyframes voiceSearchRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* =========================================================
+   VOICE RECORDING
+========================================================= */
+
+.mic-button.recording {
+  position: relative;
+
+  color: #2864e8;
+
+  animation: micPulse 1.2s ease-in-out infinite;
+}
+
+.mic-button.recording::after {
+  content: "";
+
+  position: absolute;
+
+  width: 28px;
+  height: 28px;
+
+  border: 3px solid #dbe8ff;
+
+  border-top-color: #2864e8;
+
+  border-radius: 50%;
+
+  animation: micRotate 0.8s linear infinite;
+}
+
+@keyframes micRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes micPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+/* =========================================================
+   SEND BUTTON
+========================================================= */
+
+.send-button {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background: #2864e8;
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease;
+}
+
+.send-button:hover {
+  background: #1d55ce;
+
+  transform: scale(1.04);
+}
+
+.send-button:active {
+  transform: scale(0.96);
+}
+
+/* =========================================================
+   OPEN CHAT BUTTON
+========================================================= */
+
+.ai-chat-open-button {
+  border: none;
+
+  padding: 13px 22px;
+
+  border-radius: 10px;
+
+  background: #2864e8;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+
+  border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .app-container {
+    padding: 0;
+  }
+
+  .chat-window {
+    width: 100%;
+    height: 100vh;
+
+    border-radius: 0;
+  }
+}
+/* =========================================================
+   MESSAGE CONTENT
+========================================================= */
+
+.message-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+/* =========================================================
+   USER MESSAGE ALIGNMENT
+========================================================= */
+
+.user-row .message-content {
+  align-items: flex-end;
+}
+
+
+/* =========================================================
+   AI MESSAGE ALIGNMENT
+========================================================= */
+
+.ai-row .message-content {
+  align-items: flex-start;
+}
+
+/* =========================================================
+   PRODUCT RESULTS
+========================================================= */
+
+.product-results-container {
+  width: 100%;
+
+  margin-top: 8px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+/* =========================================================
+   PRODUCT DETAILS CARD
+========================================================= */
+
+.product-details-card {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ee;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   PRODUCT CARD HEADER
+========================================================= */
+
+.product-card-header {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 14px 16px;
+
+  background: #f7f9fc;
+
+  border-bottom: 1px solid #e6ebf2;
+}
+
+
+/* =========================================================
+   PRODUCT CARD ICON
+========================================================= */
+
+.product-card-icon {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #eaf1ff;
+
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   PRODUCT CARD TITLE
+========================================================= */
+
+.product-card-title {
+  font-size: 15px;
+
+  font-weight: 700;
+
+  color: #1e293b;
+}
+
+
+/* =========================================================
+   PRODUCT CARD SUBTITLE
+========================================================= */
+
+.product-card-subtitle {
+  margin-top: 2px;
+
+  font-size: 11px;
+
+  color: #64748b;
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE CONTAINER
+========================================================= */
+
+.product-image-container {
+  width: 100%;
+
+  padding: 18px 16px 12px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE
+========================================================= */
+
+.product-image {
+  width: 100%;
+
+  max-width: 230px;
+
+  height: 150px;
+
+  object-fit: contain;
+
+  display: block;
+
+  border-radius: 12px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+}
+
+/* =========================================================
+   PRODUCT CARD FIELDS
+========================================================= */
+
+.product-card-fields {
+  padding: 8px 16px 14px;
+}
+
+
+/* =========================================================
+   PRODUCT FIELD ROW
+========================================================= */
+
+.product-field-row {
+  display: grid;
+
+  grid-template-columns:
+    42% 58%;
+
+  gap: 8px;
+
+  padding: 9px 0;
+
+  border-bottom: 1px solid #eef2f7;
+}
+
+
+/* Remove border from last row */
+
+.product-field-row:last-child {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   PRODUCT FIELD LABEL
+========================================================= */
+
+.product-field-label {
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color: #64748b;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   PRODUCT FIELD VALUE
+========================================================= */
+
+.product-field-value {
+  font-size: 13px;
+
+  font-weight: 500;
+
+  color: #1e293b;
+
+  line-height: 1.4;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   OPTION BUTTONS
+========================================================= */
+
+.chat-options {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-top: 10px;
+}
+
+
+/* =========================================================
+   OPTION BUTTON
+========================================================= */
+
+.chat-option-button {
+  border: 1px solid #2864e8;
+
+  border-radius: 9px;
+
+  padding: 7px 12px;
+
+  background: #ffffff;
+
+  color: #2864e8;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.15s ease,
+    box-shadow 0.18s ease;
+}
+
+
+/* =========================================================
+   OPTION BUTTON HOVER
+========================================================= */
+
+.chat-option-button:hover {
+  background: #2864e8;
+
+  color: #ffffff;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 10px rgba(40, 100, 232, 0.22);
+}
+
+
+/* =========================================================
+   OPTION BUTTON ACTIVE
+========================================================= */
+
+.chat-option-button:active {
+  transform: scale(0.97);
+}
+
+
+/* =========================================================
+   OPTION BUTTON DISABLED
+========================================================= */
+
+.chat-option-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   MOBILE PRODUCT CARD
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .product-field-row {
+    grid-template-columns: 40% 60%;
+  }
+
+  .product-image {
+    max-width: 180px;
+
+    height: 130px;
+  }
+}
+
+/* =========================================================
+   PRODUCT DETAILS TABLE
+   ========================================================= */
+
+.product-table-container {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #ffffff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.product-table-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.product-table-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.product-table-subtitle {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+
+/* =========================================================
+   HORIZONTAL SCROLL AREA
+   ========================================================= */
+
+.product-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.product-details-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: auto;
+}
+
+
+/* =========================================================
+   TABLE HEADER CELLS
+   ========================================================= */
+
+.product-details-table th {
+  padding: 12px 14px;
+  background: #f1f5f9;
+  color: #1f2937;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid #dbe1e8;
+  border-right: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+.product-details-table th:last-child {
+  border-right: none;
+}
+
+
+/* =========================================================
+   TABLE BODY CELLS
+   ========================================================= */
+
+.product-details-table td {
+  padding: 12px 14px;
+  color: #374151;
+  font-size: 12px;
+  line-height: 1.45;
+  vertical-align: top;
+  border-bottom: 1px solid #edf0f3;
+  border-right: 1px solid #edf0f3;
+  white-space: normal;
+  min-width: 100px;
+  max-width: 220px;
+  word-break: break-word;
+}
+
+.product-details-table td:last-child {
+  border-right: none;
+}
+
+
+/* =========================================================
+   ROW HOVER
+   ========================================================= */
+
+.product-details-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+
+/* =========================================================
+   LAST ROW
+   ========================================================= */
+
+.product-details-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   HORIZONTAL SCROLLBAR
+   ========================================================= */
+
+.product-table-wrapper::-webkit-scrollbar {
+  height: 7px;
+}
+
+.product-table-wrapper::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.product-table-wrapper::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.product-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
+/* =========================================================
+   MOBILE / SMALL CHAT WINDOW
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .product-table-container {
+    border-radius: 12px;
+  }
+
+  .product-table-header {
+    padding: 12px 14px;
+  }
+
+  .product-details-table th {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .product-details-table td {
+    padding: 10px 12px;
+    font-size: 11px;
+    min-width: 95px;
+    max-width: 180px;
+  }
+}
