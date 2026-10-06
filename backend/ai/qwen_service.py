@@ -1,7 +1,7 @@
 from ollama import chat
 import json
 
-MODEL_NAME = "qwen2.5vl:7b"
+MODEL_NAME = "qwen2.5:7b"
 
 class QwenCatalogEngine:
     """

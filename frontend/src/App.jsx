@@ -54,6 +54,12 @@ function App() {
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
 
+  const speechSynthesisRef = useRef(null);
+  const currentUtteranceRef = useRef(null);
+
+  const [speakingMessageId, setSpeakingMessageId] = useState(null);
+  const [playedMessageIds, setPlayedMessageIds] = useState(new Set());
+
   // =========================================================
   // AUTO SCROLL
   // =========================================================
@@ -64,11 +70,26 @@ function App() {
     });
   }, [messages, isLoading]);
 
+  useEffect(() => {
+    if ("speechSynthesis" in window) {
+      speechSynthesisRef.current = window.speechSynthesis;
+    }
+
+    return () => {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+
+      currentUtteranceRef.current = null;
+    };
+  }, []);
+
   // =========================================================
   // START VOICE RECORDING
   // =========================================================
 
   const startRecording = async () => {
+    stopSpeech();
     if (isLoading || isRecording) {
       return;
     }
@@ -242,6 +263,71 @@ function App() {
   // =========================================================
   // SEND MESSAGE
   // =========================================================
+  
+  const stopSpeech = () => {
+    if (speechSynthesisRef.current) {
+      speechSynthesisRef.current.cancel();
+    }
+
+    currentUtteranceRef.current = null;
+    setSpeakingMessageId(null);
+  };
+  
+  const speakMessage = (chatMessage) => {
+    if (!chatMessage?.text) return;
+
+    if (!("speechSynthesis" in window)) {
+      console.warn("Browser does not support Speech Synthesis.");
+      return;
+    }
+
+    const synthesis = speechSynthesisRef.current || window.speechSynthesis;
+
+    // If the same message is currently speaking, stop it
+    if (speakingMessageId === chatMessage.id) {
+      stopSpeech();
+      return;
+    }
+
+    // Stop any previously playing message
+    synthesis.cancel();
+
+    const text = String(chatMessage.text).trim();
+
+    if (!text) return;
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    utterance.onstart = () => {
+      setSpeakingMessageId(chatMessage.id);
+    };
+
+    utterance.onend = () => {
+      if (currentUtteranceRef.current === utterance) {
+        currentUtteranceRef.current = null;
+        setSpeakingMessageId(null);
+
+        setPlayedMessageIds((previousIds) => {
+          const updatedIds = new Set(previousIds);
+          updatedIds.add(chatMessage.id);
+          return updatedIds;
+        });
+      }
+    };
+
+    utterance.onerror = () => {
+      if (currentUtteranceRef.current === utterance) {
+        currentUtteranceRef.current = null;
+        setSpeakingMessageId(null);
+      }
+    };
+
+    currentUtteranceRef.current = utterance;
+
+    setSpeakingMessageId(chatMessage.id);
+
+    synthesis.speak(utterance);
+  };
 
   const sendMessage = async (selectedMessage = null) => {
     // -------------------------------------------------------
@@ -268,6 +354,8 @@ function App() {
     if (isLoading) {
       return;
     }
+
+    stopSpeech();
 
     // -------------------------------------------------------
     // ADD USER MESSAGE
@@ -498,33 +586,37 @@ function App() {
       // ADD AI MESSAGE
       // =====================================================
 
+      const aiMessage = {
+        id: Date.now() + Math.random(),
+
+        sender: "ai",
+
+        text: aiText,
+
+        // Dynamic AI options
+        options: options,
+
+        // Conversation information
+        action: action,
+
+        field: field,
+
+        presentationFormat: presentationFormat,
+
+        // Raw records
+        records: records,
+
+        // Frontend mapped records
+        frontendRecords: frontendRecords,
+      };
+
       setMessages((previousMessages) => [
         ...previousMessages,
-
-        {
-          id: Date.now() + Math.random(),
-
-          sender: "ai",
-
-          text: aiText,
-
-          // Dynamic AI options
-          options: options,
-
-          // Conversation information
-          action: action,
-
-          field: field,
-
-          presentationFormat: presentationFormat,
-
-          // Raw records
-          records: records,
-
-          // Frontend mapped records
-          frontendRecords: frontendRecords,
-        },
+        aiMessage,
       ]);
+
+      // Automatically speak the AI response
+      speakMessage(aiMessage);
     } catch (error) {
       // =====================================================
       // ERROR
@@ -1177,6 +1269,56 @@ function App() {
                   <div className="message-text">
                     {chatMessage.text}
                   </div>
+                  {/* =========================================
+                      AI TEXT-TO-SPEECH
+                  ========================================= */}
+                  {chatMessage.sender === "ai" && (
+                    <div className="message-speech-control">
+
+                      <button
+                        type="button"
+                        className={`speaker-button ${
+                          speakingMessageId === chatMessage.id
+                            ? "speaking"
+                            : ""
+                        }`}
+                        onClick={() => speakMessage(chatMessage)}
+                        title={
+                          speakingMessageId === chatMessage.id
+                            ? "Stop voice"
+                            : playedMessageIds.has(chatMessage.id)
+                            ? "Replay voice"
+                            : "Play voice"
+                        }
+                        aria-label={
+                          speakingMessageId === chatMessage.id
+                            ? "Stop voice response"
+                            : playedMessageIds.has(chatMessage.id)
+                            ? "Replay voice response"
+                            : "Play voice response"
+                        }
+                      >
+
+                        {speakingMessageId === chatMessage.id
+                          ? "🔊"
+                          : "🔈"}
+
+                      </button>
+
+                      {/* Replay icon */}
+                      {playedMessageIds.has(chatMessage.id) &&
+                        speakingMessageId !== chatMessage.id && (
+                          <span
+                            className="replay-icon"
+                            title="Replay voice"
+                          >
+                            ↻
+                          </span>
+                        )}
+
+                    </div>
+                  )}
+                  
 
                   {/* =========================================
                       AI OPTIONS

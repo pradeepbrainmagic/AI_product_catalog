@@ -4,7 +4,7 @@ from collections import Counter
 from ollama import chat
 
 
-MODEL_NAME = "qwen2.5vl:7b"
+MODEL_NAME = "qwen2.5:7b"
 
 
 class DynamicQuestionEngine:

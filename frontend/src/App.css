@@ -1159,3 +1159,89 @@
     max-width: 180px;
   }
 }
+
+/* =========================================
+   AI TEXT-TO-SPEECH SPEAKER
+========================================= */
+
+.message-speech-control {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.speaker-button {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+  color: #64748b;
+
+  font-size: 18px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.speaker-button:hover {
+  background-color: #eff6ff;
+  color: #2563eb;
+  transform: scale(1.05);
+}
+
+.speaker-button:active {
+  transform: scale(0.95);
+}
+
+/* Currently speaking */
+.speaker-button.speaking {
+  background-color: #eff6ff;
+  color: #2563eb;
+
+  animation: speakerPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes speakerPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.replay-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 26px;
+  height: 26px;
+
+  margin-left: 4px;
+
+  color: #64748b;
+
+  font-size: 18px;
+  font-weight: 500;
+
+  opacity: 0.85;
+}
