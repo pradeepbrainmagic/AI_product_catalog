@@ -46,7 +46,11 @@ class CatalogDatabase:
             "database": database or os.getenv(
                 "CATALOG_DB_NAME",
                 "ai_catalog"
-            )
+            ),
+            "port": int(os.getenv(
+                "CATALOG_DB_PORT",
+                "3306"
+            ))
         }
 
     # =========================================================

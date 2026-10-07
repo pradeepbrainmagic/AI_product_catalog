@@ -13,7 +13,7 @@ class SchemaMapper:
     # DATABASE TABLE
     # =========================================================
 
-    TABLE_NAME = "tbl_Product"
+    TABLE_NAME = "tbl_product"
     # Metadata table
     METADATA_TABLE_NAME = "catalog_field_metadata"
 

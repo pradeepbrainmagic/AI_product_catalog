@@ -1,11 +1,24 @@
 import json
+import requests
 from collections import Counter
 
-from ollama import chat
-
-
 MODEL_NAME = "qwen2.5:7b"
+MODAL_QWEN_URL = "https://brainmagictechnova--product-catalog-qwen-generate.modal.run"
 
+def call_qwen(prompt, temperature=0):
+    response = requests.post(
+        MODAL_QWEN_URL,
+        json={
+            "prompt": prompt
+        },
+        timeout=300,
+    )
+
+    response.raise_for_status()
+
+    data = response.json()
+
+    return data.get("response", "")
 
 class DynamicQuestionEngine:
     """
@@ -990,22 +1003,12 @@ For no result:
 
             try:
 
-                response = chat(
-                     messages=[
-                        {
-                            "role": "system",
-                            "content": fallback_prompt
-                        }
-                    ],
-                    format="json",
-                    options={
-                        "temperature": 0.7
-                    }
+                response_text = call_qwen(
+                    prompt=fallback_prompt,
+                    temperature=0.7
                 )
 
-                result = json.loads(
-                    response.message.content
-                )
+                result = json.loads(response_text) 
 
                 return {
                     "action": "show_products",
@@ -1159,23 +1162,12 @@ For no result:
 
         try:
 
-            response = chat(
-                model=self.model_name,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": prompt
-                    }
-                ],
-                format="json",
-                options={
-                    "temperature": 0.7
-                }
+            response_text = call_qwen(
+                prompt=prompt,
+                temperature=0.7
             )
 
-            result = json.loads(
-                response.message.content
-            )
+            result = json.loads(response_text)
             print(
                 "DEBUG QWEN QUESTION ENGINE RESULT:",
                 result

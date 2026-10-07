@@ -1,7 +1,22 @@
-from ollama import chat
 import json
+import requests
 
 MODEL_NAME = "qwen2.5:7b"
+MODAL_QWEN_URL = "https://brainmagictechnova--product-catalog-qwen-generate.modal.run"
+def call_qwen(prompt, system_prompt="", temperature=0):
+    response = requests.post(
+        MODAL_QWEN_URL,
+        json={
+            "prompt": f"{system_prompt}\n\n{prompt}"
+        },
+        timeout=300,
+    )
+
+    response.raise_for_status()
+
+    data = response.json()
+
+    return data.get("response", "")
 
 class QwenCatalogEngine:
     """
@@ -431,28 +446,14 @@ class QwenCatalogEngine:
             available_fields
         )
 
-        response = chat(
-            model=self.model_name,
-            messages=[
-                {
-                    "role": "system",
-                    "content": system_prompt
-                },
-                {
-                    "role": "user",
-                    "content": user_message.strip()
-                }
-            ],
-            format="json",
-            options={
-                "temperature": 0
-            }
+        response_text = call_qwen(
+            prompt=user_message.strip(),
+            system_prompt=system_prompt,
+            temperature=0
         )
 
         try:
-            result = json.loads(
-                response.message.content
-            )
+            result = json.loads(response_text)
         except json.JSONDecodeError:
             return {
                 "extracted_data": {}
@@ -577,31 +578,13 @@ class QwenCatalogEngine:
     """
 
         try:
-            from ollama import chat
-
-            response = chat(
-                model=self.model_name,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": system_prompt
-                    },
-                    {
-                        "role": "user",
-                        "content": user_message.strip()
-                    }
-                ],
-                format="json",
-                options={
-                    "temperature": 0.4
-                }
+            response_text = call_qwen(
+                prompt=user_message.strip(),
+                system_prompt=system_prompt,
+                temperature=0.4
             )
 
-            import json
-
-            result = json.loads(
-                response.message.content
-            )
+            result = json.loads(response_text)
 
             intent = result.get(
                 "intent",
@@ -719,27 +702,13 @@ or in a table.
 
         try:
 
-            response = chat(
-                model=self.model_name,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": system_prompt
-                    },
-                    {
-                        "role": "user",
-                        "content": user_prompt
-                    }
-                ],
-                options={
-                    "temperature": 0.5
-                }
+            response_text = call_qwen(
+                prompt=user_prompt,
+                system_prompt=system_prompt,
+                temperature=0.5
             )
 
-            message = (
-                response.message.content
-                .strip()
-            )
+            message = response_text.strip()
 
             if message:
                 return message
