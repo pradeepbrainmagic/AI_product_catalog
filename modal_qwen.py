@@ -43,14 +43,14 @@ def generate(request: dict):
 
     # Make sure model exists
     pull = subprocess.run(
-        ["ollama", "pull", "qwen2.5:7b"],
+        ["ollama", "pull", "qwen2.5vl:7b"],
         capture_output=True,
         text=True,
     )
 
     if pull.returncode != 0:
         return {
-            "error": "Failed to load Qwen2.5:7B",
+            "error": "Failed to load qwen2.5vl:7b",
             "details": pull.stderr,
         }
 
@@ -59,7 +59,7 @@ def generate(request: dict):
         [
             "ollama",
             "run",
-            "qwen2.5:7b",
+            "qwen2.5vl:7b",
             prompt,
         ],
         capture_output=True,
